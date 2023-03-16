@@ -11,6 +11,7 @@ Dark_greenish_blue = (2, 32, 39) # небо
 White = (255, 255, 255)
 DimGray = (105, 105, 105)
 BlackGray = (56, 56, 56)
+Silver = (192, 192, 192)
 
 surf = pygame.Surface((x, y))
 screen.fill(Dark_greenish_blue)
@@ -22,34 +23,48 @@ def moon(): # луна
     circle(screen, White, (x * .75, y * .25), ((x + y) // 20))
 moon()
 
-def cloud_gray(): # туча
-    ellipse(screen, DimGray,(0, 0, (x // 2), 50))
-    # ellipse(screen, DimGray, (x, y, long, thickness))
-    # ellipse(screen, DimGray, (x, y, long, thickness))
-    # ellipse(screen, DimGray, (x, y, long, thickness))
+def cloud_gray(): # туча светлая
+    width = 60
+    ellipse(screen, DimGray,(-100, 0, x, width))
+    ellipse(screen, DimGray, (x // 2, 50, x // 2, width))
+    ellipse(screen, DimGray, (x * .25, 120, x * .5, width + 15))
+    ellipse(screen, DimGray, (0, 80, x // 3, width))
+
 cloud_gray()
-# cloud_gray(350,150,300,50)
-# cloud_gray(0,10,500,100)
-# cloud_gray(-50,120,250,50)
 
-def cloud_black(x, y, long, thickness): # туча
-    ellipse(screen, BlackGray,(x, y, long, thickness))
-# cloud_black(250,100,300,70)
-# cloud_black(400,10,350,100)
-# cloud_black(10,70,250,90)
-# cloud_black(300,0,150,50)
+def cloud_black(): # туча темная
+    width = 60
+    ellipse(screen, BlackGray, (x * .75, 0, x * .2, width - 20))
+    ellipse(screen, BlackGray, (x // 2, 150, x // 2, width + 15))
+    ellipse(screen, BlackGray, (x // 10, 150, x * .5, width + 30))
+    ellipse(screen, BlackGray, (x // 20, 30, x * .5, width + 20))
 
-def alien_machine(): # инопланетная машина
-    ellipse(screen, DimGray, (20, 200, 200, 50))
-    ellipse(screen, White, (45, 190, 150, 40))
+cloud_black()
 
-    ellipse(screen, White, (40, 223, 10, 10))
-    ellipse(screen, White, (80, 233, 10, 10))
-    ellipse(screen, White, (120, 235, 10, 10))
-    ellipse(screen, White, (160, 233, 10, 10))
-    ellipse(screen, White, (200, 220, 10, 10))
 
-# alien_machine()
+
+def alien_machine(x,y,long,width): # инопланетная машина
+    polygon(screen, White, ())
+
+    ellipse(screen, DimGray, (x, y, long, width))
+    plate_x = long * .25
+    plate_y = width * .25
+    long_1 = long * .75
+    width_1 = width * .75
+
+    ellipse(screen, Silver, (x + plate_x // 2, y - plate_y // 2, long_1, width_1))
+
+    long_2 = long * .1
+    width_2 = width * .15
+
+    ellipse(screen, White, (x + long_1, y + long * .2, long_2, width_2))
+    ellipse(screen, White, (x + long_1 * 1.15, y + long * .13, long_2, width_2))
+    ellipse(screen, White, (x + long_1 * .75, y + long * .24, long_2, width_2))
+    ellipse(screen, White, (x + long_1 * .50, y + long * .24, long_2, width_2))
+    ellipse(screen, White, (x + long_1 * .25, y + long * .21, long_2, width_2))
+    ellipse(screen, White, (x + long_1 * .07, y + long * .15, long_2, width_2))
+
+alien_machine(50,400,250,83)
 
 def alien(): # инопланетянин
     aalines(screen, White)
