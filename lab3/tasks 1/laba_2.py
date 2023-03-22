@@ -21,7 +21,6 @@ pygame.display.flip()
 
 def moon(): # луна
     circle(screen, White, (x * .75, y * .25), ((x + y) // 20))
-moon()
 
 def cloud_gray(): # туча светлая
     width = 60
@@ -30,8 +29,6 @@ def cloud_gray(): # туча светлая
     ellipse(screen, DimGray, (x * .25, 120, x * .5, width + 15))
     ellipse(screen, DimGray, (0, 80, x // 3, width))
 
-cloud_gray()
-
 def cloud_black(): # туча темная
     width = 60
     ellipse(screen, BlackGray, (x * .75, 0, x * .2, width - 20))
@@ -39,12 +36,14 @@ def cloud_black(): # туча темная
     ellipse(screen, BlackGray, (x // 10, 150, x * .5, width + 30))
     ellipse(screen, BlackGray, (x // 20, 30, x * .5, width + 20))
 
-cloud_black()
-
-
-
 def alien_machine(x,y,long,width): # инопланетная машина
-    polygon(screen, White, ())
+    '''Рисуем инопланетную машину, размер вводить 1/3(длинный/ширины)
+       surface - объект pygame.Surface
+       x, y - координаты левого верхнего угла изображения
+       long, width - длинна и ширина изобажения
+       color - цвет, заданный в формате, подходящем для pygame.Color
+    '''
+    polygon(screen, White, ((x + long // 2 , y), (x + long, y + long), (x, y + long)))
 
     ellipse(screen, DimGray, (x, y, long, width))
     plate_x = long * .25
@@ -64,11 +63,10 @@ def alien_machine(x,y,long,width): # инопланетная машина
     ellipse(screen, White, (x + long_1 * .25, y + long * .21, long_2, width_2))
     ellipse(screen, White, (x + long_1 * .07, y + long * .15, long_2, width_2))
 
-alien_machine(50,400,250,83)
-
-def alien(): # инопланетянин
-    aalines(screen, White)
-
+moon()
+cloud_gray()
+cloud_black()
+alien_machine(50,200,120,40)
 
 pygame.display.update()
 clock = pygame.time.Clock()
