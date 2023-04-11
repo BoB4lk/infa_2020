@@ -1,26 +1,20 @@
-def checkio(data):
-    x = sorted(data)
-    if len(x) % 2 == 0:
-        z = len(x) // 2
-        num = (x[z] + x[z - 1]) / 2
-        return (num)
-    else:
-        return (x[len(x) // 2])
+def sort_by_ext(files: list[str]) -> list[str]:
+    return sorted(files, key=sort_by)
+def sort_by(file):
+    name, dot, ext = file.rpartition(".")
+    return (("", ext), (ext, name))[bool(name)]
 
 
 print("Example:")
-print(checkio([1, 2, 3, 4, 5]))
+print(sort_by_ext(["1.cad", "1.bat", "1.aa"]))
 
 # These "asserts" are used for self-checking
-assert checkio([1, 2, 3, 4, 5]) == 3
-assert checkio([3, 1, 2, 5, 3]) == 3
-assert checkio([1, 300, 2, 200, 1]) == 2
-assert checkio([3, 6, 20, 99, 10, 15]) == 12.5
-assert checkio([10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0]) == 5
-assert checkio([0, 7, 1, 8, 4, 9, 5, 6, 2, 3]) == 4.5
-assert checkio([33, 56, 62]) == 56
-assert checkio([21, 56, 84, 82, 52, 9]) == 54
-assert checkio([100, 1, 1, 1, 1, 1, 1]) == 1
-assert checkio([64, 6, 92, 7, 70, 5]) == 35.5
+assert sort_by_ext(["1.cad", "1.bat", "1.aa"]) == ["1.aa", "1.bat", "1.cad"]
+assert sort_by_ext(["1.cad", "1.bat", "1.aa", "2.bat"]) == ["1.aa", "1.bat", "2.bat", "1.cad"]
+assert sort_by_ext(["1.cad", "1.bat", "1.aa", ".bat"]) == [".bat",  "1.aa",  "1.bat", "1.cad"]
+assert sort_by_ext(["1.cad", "1.bat", ".aa", ".bat"]) == [".aa", ".bat", "1.bat", "1.cad"]
+assert sort_by_ext(["1.cad", "1.", "1.aa"]) == ["1.", "1.aa", "1.cad"]
+assert sort_by_ext(["1.cad", "1.bat", "1.aa", "1.aa.doc"]) == ["1.aa", "1.bat", "1.cad", "1.aa.doc"]
+assert sort_by_ext(["1.cad", "1.bat", "1.aa", ".aa.doc"]) == ["1.aa", "1.bat", "1.cad", ".aa.doc"]
 
 print("The mission is done! Click 'Check Solution' to earn rewards!")
