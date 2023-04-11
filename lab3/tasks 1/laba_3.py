@@ -38,7 +38,7 @@ while not finished:
             finished = True
         elif event.type == pygame.MOUSEBUTTONDOWN:
             if event.button == 1:
-                print('Click!')
+                click(event)
             elif event.button == 3:
                 print('Hi!')
     new_ball()
