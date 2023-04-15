@@ -23,9 +23,15 @@ def new_ball():
     color = COLORS[randint(0, 5)]
     circle(screen, color, (x, y), r)
 
-def click(event):
 
-        print(x, y, r)
+def click():
+    x_mouse = pygame.mouse.get_pos()
+    x_ball = (x - r, y - r)
+    y_ball = (x + r, y + r)
+    if x_ball <= x_mouse <= y_ball:
+        print("Педик")
+
+
 
 pygame.display.update()
 clock = pygame.time.Clock()
@@ -37,10 +43,8 @@ while not finished:
         if event.type == pygame.QUIT:
             finished = True
         elif event.type == pygame.MOUSEBUTTONDOWN:
-            if event.button == 1:
-                click(event)
-            elif event.button == 3:
-                print('Hi!')
+            click()
+
     new_ball()
     pygame.display.update()
     screen.fill(BLACK)
