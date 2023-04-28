@@ -35,7 +35,9 @@ class balls:
         self.x_ball = (self.x - self.r, self.y - self.r)
         self.y_ball = (self.x + self.r, self.y + self.r)
         if self.x_ball <= self.x_mouse <= self.y_ball:
-            print("Педик")
+            print("Попал =)")
+
+num = 0
 
 balls = balls()
 pygame.display.update()
@@ -48,10 +50,12 @@ while not finished:
         if event.type == pygame.QUIT:
             finished = True
         elif event.type == pygame.MOUSEBUTTONDOWN:
-            balls.click()
+            if balls.click() == True:
+                num += 1
 
     balls.ball()
     pygame.display.update()
     screen.fill(BLACK)
 
+print("Всего за игру попали - ", num, "раз")
 pygame.quit()
