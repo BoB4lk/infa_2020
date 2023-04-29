@@ -4,7 +4,9 @@ from random import randint
 pygame.init()
 
 FPS = 1
-screen = pygame.display.set_mode((600, 600))
+screen_width = 600
+screen_height = 600
+screen = pygame.display.set_mode((screen_width, screen_height))
 
 RED = (255, 0, 0)
 BLUE = (0, 0, 255)
@@ -27,15 +29,26 @@ class balls:
         self.color = COLORS[randint(0, 5)]
         circle(screen, self.color, (self.x, self.y), self.r)
 
+    def ball_moving(self):
+        ''' Рисуем шар разных цветов из списка и
+            в случайном месте с перемещением в одну из сторон экрана '''
+
+        self.x = screen_width / 2
+        self.y = screen_height / 2
+        self.r = 30
+        self.color = COLORS[randint(0, 5)]
+        circle(screen, self.color, (self.x, self.y), self.r)
+
     def click(self):
         ''' Определяем находится ли курсор мыши в радиусе кругаю во время клика мышью.
             Если находиться, то печатает в терминале текскст указанный в (print) '''
 
+        self.num = 0
         self.x_mouse = pygame.mouse.get_pos()
         self.x_ball = (self.x - self.r, self.y - self.r)
         self.y_ball = (self.x + self.r, self.y + self.r)
         if self.x_ball <= self.x_mouse <= self.y_ball:
-            print("Попал =)")
+            return True
 
 num = 0
 
@@ -53,9 +66,12 @@ while not finished:
             if balls.click() == True:
                 num += 1
 
-    balls.ball()
+    balls.ball_moving()
     pygame.display.update()
     screen.fill(BLACK)
 
 print("Всего за игру попали - ", num, "раз")
 pygame.quit()
+
+if __name__ == "__main__":
+    print("удачно все")
