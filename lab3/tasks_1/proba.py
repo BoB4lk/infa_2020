@@ -1,21 +1,79 @@
-def remove_all_before(items: list, border: int):
+import tkinter as tk
+from random import randint
 
-    if border in items:
-        x = items.index(border)
-        return items[x:]
-    else:
-        return items
+WIDTH = 300
+HEIGHT = 200
 
 
-print("Example:")
-print(list(remove_all_before([1, 2, 3, 4, 5], 3)))
+class Ball:
+    def __init__(self):
+        self.R = randint(20, 50)
+        self.x = randint(self.R, WIDTH - self.R)
+        self.y = randint(self.R, HEIGHT - self.R)
+        self.dx, self.dy = (+2, +3)
+        self.ball_id = canvas.create_oval(self.x - self.R,
+                                          self.y - self.R,
+                                          self.x + self.R,
+                                          self.y + self.R, fill="green")
 
-# These "asserts" are used for self-checking
-assert list(remove_all_before([1, 2, 3, 4, 5], 3)) == [3, 4, 5]
-assert list(remove_all_before([1, 1, 2, 2, 3, 3], 2)) == [2, 2, 3, 3]
-assert list(remove_all_before([1, 1, 2, 4, 2, 3, 4], 2)) == [2, 4, 2, 3, 4]
-assert list(remove_all_before([1, 1, 5, 6, 7], 2)) == [1, 1, 5, 6, 7]
-assert list(remove_all_before([], 0)) == []
-assert list(remove_all_before([7, 7, 7, 7, 7, 7, 7, 7, 7], 7)) == [7, 7, 7, 7, 7, 7, 7, 7, 7,]
+    def move(self):
+        self.x += self.dx
+        self.y += self.dy
+        if self.x + self.R > WIDTH or self.x - self.R <= 0:
+            self.dx = -self.dx
+        if self.y + self.R > HEIGHT or self.y - self.R <= 0:
+            self.dy = -self.dy
 
-print("The mission is done! Click 'Check Solution' to earn rewards!")
+    def show(self):
+        canvas.move(self.ball_id, self.dx, self.dy)
+
+
+def canvas_click_handler(event):
+    print('Hello World! x=', event.x, 'y=', event.y)
+
+
+def tick():
+    for ball in balls:
+        ball.move()
+        ball.show()
+    root.after(50, tick)
+
+
+def main():
+    global root, canvas, balls
+
+    root = tk.Tk()
+    root.geometry(str(WIDTH) + "x" + str(HEIGHT))
+    canvas = tk.Canvas(root)
+    canvas.pack(anchor="nw", fill=tk.BOTH)
+    canvas.bind('<Button-1>', canvas_click_handler)
+    balls = [Ball() for i in range(3)]
+    tick()
+    root.mainloop()
+
+
+# if __name__ == "__main__":
+#     main()
+
+#
+# def main():
+#     global root, canvas
+#     global ball_id, x, y, z
+#
+#     root = tk.Tk()
+#     root.geometry(str(WIDTH) + "x" + str(HEIGHT))
+#     canvas = tk.Canvas(root)
+#     canvas.pack(anchor="nw", fill=tk.BOTH)
+#     canvas.bind('<Button-1>', canvas_click_handler)
+#
+#     R = randint(20, 50)
+#     x = randint(R, WIDTH - R)
+#     y = randint(R, HEIGHT - R)
+#     ball_id = canvas.create_oval(x - R, y - R, x + R, y + R, fill="green")
+#
+#     tick()
+#     root.mainloop()
+
+
+if __name__ == "__main__":
+    main()
