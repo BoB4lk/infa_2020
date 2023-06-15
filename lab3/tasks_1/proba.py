@@ -1,24 +1,17 @@
-DYE = 5
-SQUARE_METERS = 10
-JOB = 8
-JOB_HOUR = 2000
-
+# формула расчета падения тела ( d = 1 / 2 * (9.8 ** 2) * t)
+# d - расстояние в метрах
+# t - время в секундах
+# g - 9.8
 def main():
-    wall_area = float(input("Введите площадь окрашиваемой стены: "))
-    price_dye = float(input("Введите стоимость 5 литвой краски: "))
+    # time = float(input("Введите время падения тела в секундах - "))
+    print("Время \t\t Расстоние")
+    print('-' * 20)
+    for time in range(1, 11):
+        distance = falling_distance(time)
+        print(time, "\t\t\t", f"{distance:.2f}")
 
-    sum_dye = wall_area / SQUARE_METERS
-    hours_spent = wall_area * JOB / SQUARE_METERS
-    sum_price_dye = price_dye * sum_dye
-    price_job = JOB_HOUR * hours_spent
-    sum_job = sum_price_dye + price_job
-
-    data_output(sum_dye, hours_spent, sum_price_dye, price_job, sum_job)
-def data_output(sum_dye, hours_spent, sum_price_dye, price_job, sum_job):
-    print(f"Кол-во требуемых емкостей краски - {sum_dye} шт")
-    print(f"Кол-во затраченного времени - {hours_spent} часов")
-    print(f"Стоимость краски - {sum_price_dye} руб.")
-    print(f"Стоимость работ - {price_job} руб.")
-    print(f"Общая стоимость всех затрат - {sum_job} руб.")
+def falling_distance(time):
+    distance = (9.8 * time * time) / 2
+    return distance
 
 main()
