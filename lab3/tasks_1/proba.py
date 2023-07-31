@@ -1,43 +1,37 @@
+import turtle
+
+
+def triangle(x1, y1, x2, y2, x3, y3, color):
+    # Задать цвет заполнения.
+    turtle.fillcolor(color)
+
+    # Поднять перо и переместить черепаху.
+    turtle.penup()
+    turtle.goto(x1, y1)
+
+    # Начертить треугольник.
+    turtle.pendown()
+    turtle.begin_fill()
+    turtle.goto(x2, y2)
+    turtle.goto(x3, y3)fsdfsdf
+    turtle.goto(x1, y1)
+    turtle.end_fill()
+
+
 def main():
-    num1 = int(input("ВВедите 1-ю оценку: "))
-    num2 = int(input("ВВедите 2-ю оценку: "))
-    num3 = int(input("ВВедите 3-ю оценку: "))
-    num4 = int(input("ВВедите 4-ю оценку: "))
-    num5 = int(input("ВВедите 5-ю оценку: "))
+    # Инициализировать черепаху.
+    turtle.hideturtle()
+    turtle.speed(0)
 
-    sum_num = calc_average(num1, num2, num3, num4, num5)
+    # Начертить три треугольника.
+    triangle(0, 0, 100, 0, 0, -100, 'red')
+    triangle(0, 0, -100, 0, 0, -100, 'green')
+    triangle(0, -100, -100, -200, 100, -200, 'blue')
 
-    score = determine_grade(sum_num)
-
-    print("-" * 20)
-    print("Оценка\t\tБалл")
-    print("-" * 20)
-
-    print(f"\t{num1}\t\t", determine_grade(num1))
-    print(f"\t{num2}\t\t", determine_grade(num2))
-    print(f"\t{num3}\t\t", determine_grade(num3))
-    print(f"\t{num4}\t\t", determine_grade(num4))
-    print(f"\t{num5}\t\t", determine_grade(num5))
-
-    print(f"Ваша средняя оценка - {score}, средний балл - {sum_num}")
+    # Не закрывать окно.
+    turtle.done()
 
 
-def calc_average(num1, num2, num3, num4, num5):
-    sum_num = num1 + num2 + num3 + num4 + num5
-    return sum_num / 5
-
-
-def determine_grade(sum_num):
-    if sum_num >= 90:
-        return "A"
-    elif sum_num >= 80:
-        return "B"
-    elif sum_num >= 70:
-        return "C"
-    elif sum_num >= 60:
-        return "D"
-    else:
-        return "F"
-
-
+# Вызвать главную функцию
 main()
+
