@@ -1,68 +1,63 @@
-
-
-YEAR_START = 1950
-YEAR_FINISH = 1990
+MIN = 1
+MAX = 9
+COLUMN = 3
+LINE = 3
+NUMS = 15
 
 def main():
-    try:
-        # YEAR_START = 1950
-        # YEAR_FINISH = 1990
-        population_1 = []   # прочитанный из файла список с общим кол-вом проживающего
-                            # населения ежегодно - в int формате
+    magic_square = [[4, 9, 2],
+                    [3, 5, 7],
+                    [8, 1, 6]]
 
-        people_year = []    # список с разницей кол-ва прибавляющегося населения ежегодно - в int формате
+    number = number_comparison(magic_square)
+    string = string_comparison(magic_square)
+    column = column_comparison(magic_square)
+    diagonal = diagonal_alignment(magic_square)
 
-        population_file = open(r'data/USPopulation.txt', 'r')
+    if number == True and string == True and\
+       column == True and diagonal == True:
+        print('Ура.Квадрат являеться магическим')
+    else:
+        print('Квадрат не магический')
 
-        for years in population_file.readlines():   # добавление списка из файла в в пустой список
-            population_1.append(int(years))
+def number_comparison(magic):   # Проверяем все ли значения в диапазоне от 1 до 9
+    status = True
 
-        population_file.close()
+    for column in range(COLUMN):
+        for line in range(LINE):
+            if magic[column][line] > MAX or magic[column][line] < 1:
+                status = False
 
-        for people in range(YEAR_FINISH - YEAR_START - 1):   # вычисляем кол-во населения прибавляющевося каждый год
-            people_1 = population_1[people+1] - population_1[people]
-            people_year.append(people_1)
+    return status
 
-        average = average_people_year(people_year)
-        print(f'среднегодовое изменение численности населения - {average:,.0f} человек')
+def string_comparison(magic):   # сумируем и сравниваем строки
+    status = True
 
-        max_people = max_people_year(people_year)
-        print(f'{max_people} год с наибольшим увеличением численности населения с {YEAR_START}г по {YEAR_FINISH}г')
+    line_1 = magic[0][0] + magic[0][1] + magic[0][2]
+    line_2 = magic[1][0] + magic[1][1] + magic[1][2]
+    line_3 = magic[2][0] + magic[2][1] + magic[2][2]
 
-        min_people = min_people_year(people_year)
-        print(f'{min_people} год с наименьшим увеличением численности населения с {YEAR_START}г по {YEAR_FINISH}г')
+    if line_1 == NUMS and line_2 == NUMS and line_3 == NUMS:
+        return status
 
-        print(people_year)
+def column_comparison(magic):   # сумируем и сравниваем столбцы
+    status = True
 
-    except IOError:
-        print('Файл не найден')
-    except:
-        print('Непонятная ошибка!!!')
+    column_1 = magic[0][0] + magic[1][0] + magic[2][0]
+    column_2 = magic[0][1] + magic[1][1] + magic[2][1]
+    column_3 = magic[0][2] + magic[1][2] + magic[2][2]
 
-def max_people_year(people):   # год с наибольшим увеличением численности населения
-    max_people = max(people)
+    if column_1 == NUMS and column_2 == NUMS and column_3 == NUMS:
+        return status
 
-    index_max_people = people.index(max_people)
+def diagonal_alignment(magic):   # сумируем и сравниваем диагонали
+    status =True
 
-    return YEAR_START + index_max_people
+    diagonal_1 = magic[0][0] + magic[1][1] + magic[2][2]
+    diagonal_2 = magic[0][2] + magic[1][1] + magic[2][0]
 
-def min_people_year(people):   # год с наименьшим увеличением численности населения
-    min_people = min(people)
-
-    index_min_people = people.index(min_people)
-
-    return YEAR_START + index_min_people
-
-def average_people_year(people):   # вычисляем среднегодовое изменение численности населения
-    total = 0
-
-    for average_number in people:
-        total += average_number
-
-    total /= len(people)
-
-    return total
-
+    if diagonal_1 == NUMS and diagonal_2 == NUMS:
+        return status
 
 if __name__ == '__main__':
     main()
