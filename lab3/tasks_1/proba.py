@@ -1,38 +1,35 @@
 
 
-def main():
-    try:
-        numbers = []
+class Book:
 
-        user_number = int(input('Введите целое число больше 1 - '))
+    def __init__(self, book_title, author_name, publisher_name):
+        self.__book_title = book_title
+        self.__author_name = author_name
+        self.__publisher_name = publisher_name
 
-        if user_number <= 1:
-            print('Ошибка! Введите целое число больше 1.')
-        else:
-            for _ in range(2, user_number + 1):
-                numbers.append(_)
+    def set_book_title(self,book_title):
+        self.__book_title = book_title
 
-        for _ in numbers:
-            status = prime_numbers(_, user_number)
+    def set_author_name(self, author_name):
+        self.__author_name = author_name
 
-        if status:
-            print('Простое число')
-        else:
-            print('Составное число')
+    def set_publisher_name(self, publisher_name):
+        self.__publisher_name = publisher_name
 
-    except:
-        print('Ошибка!')
+    def get_book_title(self):
+        return self.__book_title
 
-def prime_numbers(numbers, user):
-    status = True
+    def get_author_name(self):
+        return self.__author_name
 
-    for _ in range(2, numbers):
-        if user % _ == 0:
-            status = False
-    return status
+    def get_publisher_name(self):
+        return self.__publisher_name
 
+    def __str__(self):
+        return (f'название: {self.__book_title}/n'
+                f'автор: {self.__author_name}/n'
+                f'издатель: {self.__publisher_name}')
 
 
 
-if __name__ == '__main__':
-    main()
+
