@@ -22,3 +22,9 @@ class Pet:
 
     def get_age(self):
         return self.__age
+
+
+    def __str__(self):
+        return (f'Имя - {self.__name}\n'
+                f'Порода - {self.__animal_type}\n'
+                f'Возраст - {self.__age} лет')
