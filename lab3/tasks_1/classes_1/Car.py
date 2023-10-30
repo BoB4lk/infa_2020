@@ -6,18 +6,22 @@ class Car:
     def __init__(self, year_model, make):
         self.__year_model = year_model
         self.__make = make
-        self.__speed = SPEED_0
+        self.__speed = 0
 
     def set_year_model(self, year_model):
+        '''Модель машины'''
         self.__year_model = year_model
 
     def set_make(self, make):
+        '''Фирма изготовителя'''
         self.__make = make
 
     def set_accelerate(self):
+        '''Прибавляет к скорости +5, при каждом вызове '''
         self.__speed += SPEED_5
 
     def set_break(self):
+        '''Убавляет от скорости -5, при каждомвызове'''
         self.__speed -= SPEED_5
 
     def get_year_model(self):
