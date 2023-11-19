@@ -1,5 +1,4 @@
 
-SPEED_0 = 0
 SPEED_5 = 5
 
 class Car:
