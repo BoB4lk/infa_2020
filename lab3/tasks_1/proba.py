@@ -1,28 +1,19 @@
-
-from Information import Info
+import Employee
 
 def main():
-    my_info = Info('Джон Доу', '111 Моя улица', 22, '555-555-1281')
-    mom_info = Info('Мать', '222 Мамина улица', 52, '555-555-1234')
-    sister_info = Info('Джейн Доу', '333 Ее улица', 20, '555-555-4444')
+    info = Employee.ProductionWorker
 
-    print('Информация обо мне:')
-    display_info(my_info)
-    print()
+    name = input('1name: ')
+    namber = int(input('2namber: '))
+    namber_change = int(input('1 or 2: '))
+    work_house = float(input('4work_house: '))
 
-    print("Информация о матери:")
-    display_info(mom_info)
-    print()
+    intro = info(namber_change, work_house, name, namber)
 
-    print("Информация о сестре:")
-    display_info(sister_info)
-
-
-def display_info(info):
-    print(' Имя:     ', info.get_name())
-    print(' Адрес:   ', info.get_adress())
-    print(' Возраст: ', info.get_age())
-    print(' Телефон: ', info.get_phone_namber())
+    print(f'имя:',intro.get_name())
+    print(f'номер сотрудника:', intro.get_namber())
+    print(f'номер смены:',intro.get_shift())
+    print(f'ставка труда:',intro.get_hourly())
 
 
 if __name__ == '__main__':
